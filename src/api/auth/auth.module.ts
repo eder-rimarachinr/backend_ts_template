@@ -1,8 +1,10 @@
-import express from "express";
+import { Router } from "express";
 import { AuthController } from "./auth.controller";
+import { signInValidator } from "./validators/auth.validator";
+import { allValidator } from "../../middlewares/errorValidator";
 
 export class AuthModule {
-    public router = express.Router();
+    public router: Router = Router();
     private controller = new AuthController();
 
     constructor() {
@@ -10,7 +12,12 @@ export class AuthModule {
     }
 
     private initializeRoutes() {
-        this.router.post("/login", this.controller.login);
-        this.router.post("/register", this.controller.register);
+
+        this.router.post("/signin",
+            signInValidator,
+            allValidator,
+            this.controller.signin);
+
+        this.router.post("/signup", this.controller.signup);
     }
 }

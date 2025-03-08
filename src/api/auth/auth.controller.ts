@@ -68,9 +68,9 @@ export class AuthController {
      *       500:
      *         $ref: '#/components/responses/ErrorResponse'
      */
-    public async login(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public async signin(req: Request, res: Response, next: NextFunction) {
         try {
-            const result = await this.authService.login(req.body);
+            const result = await this.authService.signin(req.body);
             res.status(HttpStatusCode.OK).json(ApiResponse.success("Login exitoso", [], result, HttpStatusCode.OK));
         } catch (error) {
             next(error);
@@ -131,9 +131,9 @@ export class AuthController {
      *       500:
      *         $ref: '#/components/responses/ErrorResponse'
      */
-    public async register(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public async signup(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const result = await this.authService.register(req.body);
+            const result = await this.authService.signup(req.body);
             res.status(HttpStatusCode.CREATED).json(ApiResponse.success("Registro exitoso", [], result, HttpStatusCode.CREATED));
         } catch (error) {
             next(error);

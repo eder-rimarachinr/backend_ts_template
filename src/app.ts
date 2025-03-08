@@ -11,7 +11,10 @@ import { UsersModule } from "./api/users/users.module";
 import { errorHandler } from "./middlewares/errorHandler";
 import { SystemModule } from "./api/system/system.module";
 import { DataBase } from "./config/database/config";
+import { config } from 'dotenv';
 
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+config({ path: envFile });
 
 export class App {
   public app: express.Application;
@@ -21,8 +24,6 @@ export class App {
     this.initializeMiddlewares();
     this.initializeModules();
     this.initializeSwagger();
-
-
   }
 
   private initializeMiddlewares() {
@@ -41,8 +42,8 @@ export class App {
 
   private initializeModules() {
     // Ruta no protegida
-    this.app.use("/api/auth", new AuthModule().router);
     this.app.use("/api/system", new SystemModule().router);
+    this.app.use("/api/auth", new AuthModule().router);
 
     // Rutas protegidas
     this.app.use("/api/users", new UsersModule().router);
@@ -52,7 +53,9 @@ export class App {
   }
 
   private initializeSwagger() {
-    this.app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    this.app.use("/api/docs",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerSpec));
   }
 
   public listen() {
