@@ -9,9 +9,47 @@ const swaggerDefinition = {
     },
     servers: [
         {
-            url: 'http://localhost:3000/api', // Cambia a tu servidor en producción
+            url: 'http://localhost:3000/api',
         },
-    ],
+    ], components: {
+        responses: {
+            ErrorResponse: {
+                description: "Server error response",
+                content: {
+                    "application/json": {
+                        schema: {
+                            type: "object",
+                            properties: {
+                                message: {
+                                    type: "string",
+                                    example: "Error message",
+                                },
+                                status: {
+                                    type: "boolean",
+                                    example: false,
+                                },
+                                data: {
+                                    type: "array",
+                                    items: {
+                                        type: "string",
+                                    },
+                                    example: [],
+                                },
+                                errors: {
+                                    type: "array",
+                                    items: {
+                                        type: "string",
+                                    },
+                                    example: ["Error 1", "Error 2"],
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+
+        },
+    },
 };
 
 const options = {

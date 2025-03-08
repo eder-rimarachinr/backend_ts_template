@@ -38,7 +38,7 @@ export class App {
 
   private initializeModules() {
     // Ruta no protegida
-    this.app.use("/api/v1/auth", new AuthModule().router);
+    this.app.use("/api/auth", new AuthModule().router);
     this.app.use("/api/system", new SystemModule().router);
 
     // Rutas protegidas
