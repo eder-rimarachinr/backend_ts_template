@@ -6,10 +6,11 @@ import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger/swagger.config";
 
-import { AuthModule } from "./modules/auth/auth.module";
-import { UsersModule } from "./modules/users/users.module";
+import { AuthModule } from "./api/auth/auth.module";
+import { UsersModule } from "./api/users/users.module";
 import { errorHandler } from "./middlewares/errorHandler";
-import { SystemModule } from "./modules/system/system.module";
+import { SystemModule } from "./api/system/system.module";
+import { DataBase } from "./config/database/config";
 
 
 export class App {
@@ -20,6 +21,8 @@ export class App {
     this.initializeMiddlewares();
     this.initializeModules();
     this.initializeSwagger();
+
+
   }
 
   private initializeMiddlewares() {
@@ -53,8 +56,9 @@ export class App {
   }
 
   public listen() {
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PROY_APP_PORT || 4000;
     this.app.listen(PORT, () => {
+      DataBase.instance;
       console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     });
   }

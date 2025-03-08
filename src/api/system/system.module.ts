@@ -14,9 +14,9 @@ export class SystemModule {
 
     private getVersion(req: Request, res: Response) {
         res.json({
-            status: "success",
             message: "System version",
-            version: "1.0.0"
+            name: process.env.APP_NAME,
+            version: process.env.APP_VERSION
         });
     }
 }

@@ -10,7 +10,7 @@ export class UsersModule {
     }
 
     private initializeRoutes() {
-        this.router.post("/getall", this.controller.login);
+        this.router.get("/getall", this.controller.getAllUsers);
         this.router.post("/create", this.controller.register);
     }
 }

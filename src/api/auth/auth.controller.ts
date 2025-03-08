@@ -10,7 +10,12 @@ import { HttpStatusCode } from "../../utils/httpStatusCodes";
  *   description: Endpoints de autenticación de usuarios
  */
 export class AuthController {
-    private authService = new AuthService();
+    private authService: AuthService;
+
+    constructor() {
+        // Instanciamos el servicio de autenticación
+        this.authService = new AuthService();
+    }
 
     /**
      * @swagger
@@ -63,16 +68,14 @@ export class AuthController {
      *       500:
      *         $ref: '#/components/responses/ErrorResponse'
      */
-
-    login = async (req: Request, res: Response, next: NextFunction) => {
+    public async login(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const result = await this.authService.login(req.body);
-
-            res.status(HttpStatusCode.OK).json(ApiResponse.success("Login exitoso", [], result));
+            res.status(HttpStatusCode.OK).json(ApiResponse.success("Login exitoso", [], result, HttpStatusCode.OK));
         } catch (error) {
             next(error);
         }
-    };
+    }
 
     /**
      * @swagger
@@ -128,21 +131,12 @@ export class AuthController {
      *       500:
      *         $ref: '#/components/responses/ErrorResponse'
      */
-    register = async (req: Request, res: Response, next: NextFunction) => {
+    public async register(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const result = await this.authService.register(req.body);
-            res
-                .status(HttpStatusCode.CREATED)
-                .json(
-                    ApiResponse.success(
-                        "Registro exitoso",
-                        [],
-                        result,
-                        HttpStatusCode.CREATED
-                    )
-                );
+            res.status(HttpStatusCode.CREATED).json(ApiResponse.success("Registro exitoso", [], result, HttpStatusCode.CREATED));
         } catch (error) {
             next(error);
         }
-    };
+    }
 }
