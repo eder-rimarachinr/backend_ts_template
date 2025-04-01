@@ -29,10 +29,6 @@ Este proyecto es un template de backend en **TypeScript**, diseñado con **Progr
   │   │   ├── user.model.ts
   │   │   ├── user.routes.ts
   │   │   └── user.repository.ts
-  ├── core
-  │   ├── database.ts
-  │   ├── server.ts
-  │   ├── app.ts
   ├── config
   │   ├── database
   |   |   |-- config.ts
