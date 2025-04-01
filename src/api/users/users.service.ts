@@ -1,3 +1,4 @@
+import { Model } from "sequelize";
 import { DataBase } from "../../config/database/config";  // Asegúrate de que la ruta sea correcta
 
 export class UsersService {
@@ -8,25 +9,22 @@ export class UsersService {
         this._db = DataBase.instance;
     }
 
-    async getAll() {
+    public async getAll(): Promise<Model[]> {
         try {
-            const users = await this._db.sequelize.models.User.findAll();
-
-            return users;
+            return await this._db.sequelize.models.User.findAll();
         } catch (error) {
             console.error("Error al obtener usuarios:", error);
-            throw error;
+            throw new Error("No se pudieron obtener los usuarios");
         }
     }
 
-    async create(data: any) {
+    public async create(data: Record<string, any>): Promise<{ message: string; data: Model }> {
         try {
-            // const user = await this._db.user.create(data);
-
-            return { message: "Usuario creado", data };
+            const user = await this._db.sequelize.models.User.create(data);
+            return { message: "Usuario creado", data: user };
         } catch (error) {
             console.error("Error al crear usuario:", error);
-            throw error;
+            throw new Error("No se pudo crear el usuario");
         }
     }
 }

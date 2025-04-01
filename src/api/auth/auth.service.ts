@@ -8,7 +8,7 @@ export class AuthService {
         this._db = DataBase.instance;
     }
 
-    async signin(data: any) {
+    public async signin(data: []): Promise<[]> {
         try {
             return data;
         } catch (error) {
@@ -16,7 +16,7 @@ export class AuthService {
         }
     }
 
-    async signup(data: any) {
+    public async signup(data: []): Promise<[]> {
         try {
             return data;
         } catch (error) {

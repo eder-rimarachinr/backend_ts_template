@@ -18,6 +18,9 @@ export class AuthModule {
             allValidator,
             this.controller.signin);
 
-        this.router.post("/signup", this.controller.signup);
+        this.router.post("/signup",
+            signInValidator,
+            allValidator,
+            this.controller.signup);
     }
 }

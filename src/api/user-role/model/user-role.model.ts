@@ -5,6 +5,7 @@ export interface UserRoleAttributes {
     user_id: number;
     role_id: number;
     assigned_by: number;
+    is_system: boolean;
 
     created_at?: Date;
     updated_at?: Date;
@@ -18,6 +19,7 @@ export class UserRole extends Model<UserRoleAttributes, UserRoleCreationAttribut
     user_id!: number;
     role_id!: number;
     assigned_by!: number;
+    is_system!: boolean;
 
     created_at?: Date;
     updated_at?: Date;
@@ -58,6 +60,10 @@ export function UserRoleFactory(sequelize: Sequelize): typeof UserRole {
                     model: 'users',
                     key: 'id',
                 },
+            },
+            is_system: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
             },
             created_at: {
                 type: DataTypes.DATE,

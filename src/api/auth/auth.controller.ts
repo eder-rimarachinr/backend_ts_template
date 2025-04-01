@@ -15,6 +15,9 @@ export class AuthController {
     constructor() {
         // Instanciamos el servicio de autenticación
         this.authService = new AuthService();
+
+        this.signin = this.signin.bind(this);
+        this.signup = this.signup.bind(this);
     }
 
     /**
@@ -71,7 +74,7 @@ export class AuthController {
     public async signin(req: Request, res: Response, next: NextFunction) {
         try {
             const result = await this.authService.signin(req.body);
-            res.status(HttpStatusCode.OK).json(ApiResponse.success("Login exitoso", [], result, HttpStatusCode.OK));
+            res.status(HttpStatusCode.OK).json(ApiResponse.success("Login exitoso", result, HttpStatusCode.OK));
         } catch (error) {
             next(error);
         }
@@ -134,7 +137,16 @@ export class AuthController {
     public async signup(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const result = await this.authService.signup(req.body);
-            res.status(HttpStatusCode.CREATED).json(ApiResponse.success("Registro exitoso", [], result, HttpStatusCode.CREATED));
+
+            res.status(HttpStatusCode.CREATED)
+                .json(
+                    ApiResponse
+                        .success(
+                            "Registro exitoso",
+                            result,
+                            HttpStatusCode.CREATED
+                        )
+                );
         } catch (error) {
             next(error);
         }

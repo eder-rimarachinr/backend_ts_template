@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { Sequelize } from 'sequelize';
+import { Dialect, Sequelize } from 'sequelize';
 import { User, UserFactory } from '../../api/users/models/user.model';
 import { Role, RoleFactory } from '../../api/role/model/role.model';
 import { Token, TokenFactory } from '../../api/token/model/token.model';
@@ -26,7 +26,7 @@ export class DataBase {
             {
                 host: process.env.PROY_BD_HOST!,
                 port: +process.env.PROY_BD_PORT!,
-                dialect: 'mysql',
+                dialect: process.env.PROY_BD_DIALECT as Dialect,
                 logging: process.env.NODE_ENV === 'development' ? console.log : false,
                 pool: {
                     max: 5,

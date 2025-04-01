@@ -8,6 +8,10 @@ export class UsersController {
 
     constructor() {
         this.usersService = new UsersService();
+
+        // Enlazamos los métodos al contexto de la clase
+        this.getAllUsers = this.getAllUsers.bind(this);
+        this.register = this.register.bind(this);
     }
 
     public async getAllUsers(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -20,7 +24,6 @@ export class UsersController {
             next(error);
         }
     }
-
 
     public async register(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
