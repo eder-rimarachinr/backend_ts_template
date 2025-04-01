@@ -4,7 +4,7 @@ Este proyecto es un template de backend en **TypeScript**, diseñado con **Progr
 
 ## 🚀 Tecnologías utilizadas
 
-- **Node.js** con **Express**
+- **Node.js** con **Express** v.22.14.0
 - **TypeScript**
 - **Sequelize** (ORM para bases de datos SQL)
 - **Passport.js** para autenticación con JWT
