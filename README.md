@@ -8,7 +8,7 @@ Este proyecto es un template de backend en **TypeScript**, diseñado con **Progr
 - **TypeScript**
 - **Sequelize** (ORM para bases de datos SQL)
 - **Passport.js** para autenticación con JWT
-- **bcryptjs** para encriptación de contraseñas
+- **bcrypt** para encriptación de contraseñas
 - **dotenv** para gestión de variables de entorno
 
 ## 📂 Estructura del proyecto
