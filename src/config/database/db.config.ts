@@ -1,11 +1,10 @@
-import { config } from 'dotenv';
+import config from './../environments'
 import { Dialect, Sequelize } from 'sequelize';
 import { User, UserFactory } from '../../api/users/models/user.model';
 import { Role, RoleFactory } from '../../api/role/model/role.model';
 import { Token, TokenFactory } from '../../api/token/model/token.model';
 import { UserRole, UserRoleFactory } from '../../api/user-role/model/user-role.model';
 
-config();
 
 
 // Clase Database que implementa el patrón Singleton
@@ -20,14 +19,14 @@ export class DataBase {
 
     private constructor() {
         this.sequelize = new Sequelize(
-            process.env.PROY_BD_NAME! as string,
-            process.env.PROY_BD_USER! as string,
-            process.env.PROY_BD_PASS! as string,
+            config.PROY_BD_NAME! as string,
+            config.PROY_BD_USER! as string,
+            config.PROY_BD_PASS! as string,
             {
-                host: process.env.PROY_BD_HOST!,
-                port: +process.env.PROY_BD_PORT!,
-                dialect: process.env.PROY_BD_DIALECT as Dialect,
-                logging: process.env.NODE_ENV === 'development' ? console.log : false,
+                host: config.PROY_BD_HOST!,
+                port: +config.PROY_BD_PORT!,
+                dialect: config.PROY_BD_DIALECT as Dialect,
+                logging: config.NODE_ENV === 'development' ? console.log : false,
                 pool: {
                     max: 5,
                     min: 0,

@@ -3,18 +3,16 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import config from './config/environments'
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger/swagger.config";
 
-import { AuthModule } from "./api/auth/auth.module";
-import { UsersModule } from "./api/users/users.module";
 import { errorHandler } from "./middlewares/errorHandler";
 import { SystemModule } from "./api/system/system.module";
-import { DataBase } from "./config/database/config";
-import { config } from 'dotenv';
+import { DataBase } from "./config/database/db.config";
 
-const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
-config({ path: envFile });
+import { AuthModule } from "./api/auth/auth.module";
+import { UsersModule } from "./api/users/users.module";
 
 export class App {
   public app: express.Application;
@@ -59,7 +57,7 @@ export class App {
   }
 
   public listen() {
-    const PORT = process.env.PROY_APP_PORT || 4000;
+    const PORT = config.PROY_APP_PORT;
     this.app.listen(PORT, () => {
       DataBase.instance;
       console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);

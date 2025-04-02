@@ -1,4 +1,4 @@
-import { DataBase } from "../../config/database/config";
+import { DataBase } from "../../config/database/db.config";
 
 export class AuthService {
 

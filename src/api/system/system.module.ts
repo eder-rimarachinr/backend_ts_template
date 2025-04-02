@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express";
+import config from './../../config/environments'
 
 export class SystemModule {
     public router: Router;
@@ -15,8 +16,8 @@ export class SystemModule {
     private getVersion(req: Request, res: Response) {
         res.json({
             message: "System version",
-            name: process.env.APP_NAME,
-            version: process.env.APP_VERSION
+            name: config.APP_NAME,
+            version: config.APP_VERSION
         });
     }
 }

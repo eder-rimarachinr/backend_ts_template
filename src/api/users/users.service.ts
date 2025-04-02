@@ -1,5 +1,5 @@
 import { Model } from "sequelize";
-import { DataBase } from "../../config/database/config";  // Asegúrate de que la ruta sea correcta
+import { DataBase } from "../../config/database/db.config";  // Asegúrate de que la ruta sea correcta
 
 export class UsersService {
 
